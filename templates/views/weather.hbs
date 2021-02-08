@@ -12,14 +12,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WeatherApp</title>
 </head>
 <body> 
    <div class="container-fluid main_menu">
         <div class="row">
             <div class="col-md-10 col-12 mx-auto">
                 <nav class="navbar navbar-expand-lg ">
-                    <a class="navbar-brand" href="#"><i class="far fa-snowflake"></i> weathercheck <i class="far fa-snowflake"></i> </a>
+                    <a class="navbar-brand" href="#"><i class="far fa-snowflake"></i>  Need To Know Weather?  <i class="far fa-snowflake"></i> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -50,26 +50,75 @@
             <div class="col-md-10 col-12 mx-auto">
              <div class="main_content">
                  <form class="temp_form">
-                     <input type="text" id="cityname" placeholder="enter your city name" autocomplet="off">
-                     <input type="submit" value="serch" id="submitbtn">
+                     <input type="text" id="cityname" placeholder="Enter your city name" autocomplet="off">
+                     <input type="submit" value="search" id="submitbtn">
                  </form>
              </div>
              <div class="tempinfo">
                  <div class="top_layer">
-                     <p id="day">Tuesday</p>
-                     <p id="today_date">13 OCT</p>
+                     <p id="day">Monday</p>
+                     <p id="date">08th Feb </p>
 
                  </div>
                  <div class="main_layer">
                      <p id="city_name">Get output here</p>
                      <div class="middle_layer data_hide">
-                       <p id="temp"><span>0</span> <sup>o</sup>C</p>
-                        
+                       <p id="temp" class="text-white"><span>0</span><sup>o</sup>C</p>
+                        <p id="temp_status" class="text-white"><i class="fa fa-cloud aria-hidden="true"></i></p>
                  </div>
              </div>
             </div>
                 </div>
                 </div>
           <script src="js/main.js"></script>
+          <script>
+            let cutDate = document.getElementById('date');
+            let day=document.getElementById('day');
+            const getCurrentDay =()=>{
+        var weekday = new Array(7);
+        weekday[0]="sunday";
+        weekday[1]="Monday";
+        weekday[2]="Tuesday";
+        weekday[3]="Wensday";
+        weekday[4]="Thursday";
+        weekday[5]="Friday";
+        weekday[6]="Satday";
+        let currentTime = new Date();
+        let days =weekday[currentTime.getDay()];
+        day.innerText = days;
+    };
+    getCurrentDay();
+    const getCurrentTime=()=>{
+        var months=[
+            "Jan",
+            "Feb",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "Augest",
+            "Sept",
+            "Oct",
+            "Nov",
+            "Dec",
+        ]; 
+        var now = new Date();
+        var month=months[now.getMonth()];
+        var date=now.getDate();
+       let hours=now.getHours();
+       let mins=now.getMinutes();
+       let period="AM";
+       if(hours>11){
+           period="PM";
+           if(hours>12)  hours-=12;
+       }
+       if(mins<10){
+           mins="0"+mins;
+       }
+       return `${month}${date} | ${hours}:${mins}${period}`;
+        }; 
+      cutDate.innerHTML =getCurrentTime();
+          </script>
 </body>
 </html>
